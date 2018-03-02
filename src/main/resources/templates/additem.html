@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/addlostitem}" th:object="${lostitemobject}" method="post">
+    <span th:if="${#fields.hasErrors('field')}" th:errors="*{url}"></span>
+    <input type="text" th:field="*{title}">
+    <input type="checkbox" th:field="*{lost}">
+    <input type="submit" value="Add">
+</form>
+
+</body>
+</html>
