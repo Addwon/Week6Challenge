@@ -77,4 +77,20 @@ public class AdministratorService {
         return categoryRepository.findAll();
     }
 
+    public Iterable<AppUser> showUsers()
+    {
+        return userRepo.findAll();
+    }
+
+
+    public AppUser getUser(Authentication auth)
+    {
+        return getUser(auth.getName());
+    }
+
+    public AppUser getUser(String username)
+    {
+        return userRepo.findByUsername(username);
+    }
+
 }

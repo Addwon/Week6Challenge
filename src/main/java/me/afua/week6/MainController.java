@@ -39,6 +39,28 @@ public class MainController {
         return "additem";
     }
 
+    @GetMapping("/lostmyitem")
+    public String addMyLostItem(Model model, Authentication auth)
+    {
+        LostItem l = new LostItem();
+        l.addOwner(lostAndFound.getUser(auth.getName()));
+        model.addAttribute("lostIt",l);
+        model.addAttribute("lostEnabled",false);
+        model.addAttribute("categories",lostAndFound.showCategories());
+        return "additem";
+    }
+
+    @GetMapping("/adminaddlost")
+    public String adminAddingLostItem(Model model, Authentication auth)
+    {
+        LostItem l = new LostItem();
+        model.addAttribute("lostIt",new LostItem());
+        model.addAttribute("lostEnabled",false);
+        model.addAttribute("categories",lostAndFound.showCategories());
+        model.addAttribute("ownerlist",lostAndFound.showUsers());
+        return "additem";
+    }
+
     @PostMapping("/saveitem")
     public String saveLostItem(@Valid @ModelAttribute("lostIt") LostItem lost, BindingResult result, Model model)
     {

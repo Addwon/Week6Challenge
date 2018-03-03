@@ -37,7 +37,6 @@ public class AppUser {
     }
 
 
-
     public AppUser() {
         this.roles = new HashSet<>();
         this.lostItems = new HashSet<>();

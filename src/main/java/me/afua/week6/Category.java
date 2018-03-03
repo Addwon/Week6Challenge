@@ -12,6 +12,8 @@ public class Category {
     @Column(unique=true)
     private String name;
 
+    private String defaultPic;
+
     @OneToMany(mappedBy = "itemCategory")
     private Set <LostItem> item;
 
@@ -29,6 +31,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDefaultPic() {
+        return defaultPic;
+    }
+
+    public void setDefaultPic(String defaultPic) {
+        this.defaultPic = defaultPic;
     }
 
     public Set<LostItem> getItem() {

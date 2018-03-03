@@ -20,6 +20,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Autowired
+
     AppUserRepository userRepository;
 
     @Override
@@ -40,6 +41,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/adminaddlost").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
 
         .and()

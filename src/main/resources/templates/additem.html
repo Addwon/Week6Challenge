@@ -19,6 +19,11 @@
             <input type="text" th:field="*{image}"  class="form-control">
             <label>Lost</label>
             <input type="checkbox" th:field="*{lost}" disabled="!${lostEnabled}"><br/>
+            <span>
+                <select th:if="${adminAdd}" th:each="eachOwner:${ownerList}" th:field="${owners}">
+                    <option th:value="${eachOwner.id}" th:inline="text">[[${eachOwner.name}]]</option>
+                </select>
+            </span>
             <button type="submit" class="btn btn-defult">Add</button>
         </form>
     </div>
