@@ -1,4 +1,6 @@
 package me.afua.week6;
 
-public class AppUserRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface AppUserRepository extends CrudRepository<AppUser,Long>{
 }

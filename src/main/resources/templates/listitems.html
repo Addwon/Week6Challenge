@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+    <body>
+
+        <span sec:authorize="isAnonymous()">
+            WELCOME. SIGN IN.
+        </span>
+
+        <span sec:authorize="isAuthenticated()">
+            WELCOME,<span sec:authentication="name"></span>
+        </span>
+
+        <span>
+           <div th:each="eachItem:${lostList}">
+               <span th:if="${eachItem.lost}">
+                       <p th:text="${eachItem.title}"></p>
+                       <p th:text="${eachItem.description}"></p>
+                             <a th:if="${eachItem.lost}==true" th:href="@{/find/(id=${eachItem.id})}" th:inline="text">Found</a>
+                       </span>
+                           <img th:src="${eachItem.image}"></img>
+               </span>
+           </div>
+        </span>
+    </body>
+</html>

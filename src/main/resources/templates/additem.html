@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 </head>
 <body>
-<form th:action="@{/addlostitem}" th:object="${lostitemobject}" method="post">
-    <span th:if="${#fields.hasErrors('field')}" th:errors="*{url}"></span>
-    <input type="text" th:field="*{title}">
-    <input type="checkbox" th:field="*{lost}">
-    <input type="submit" value="Add">
-</form>
-
+    <div class="container col-md-6">
+        <form th:action="@{/saveitem}" th:object="${lostIt}" method="post">
+            <label>Title</label>
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            <input type="text" th:field="*{title}" class="form-control">
+            <label>Description</label>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{url}"></span>
+            <textarea type="text" th:field="*{description}" class="form-control"></textarea>
+            <label>Image</label>
+            <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+            <input type="text" th:field="*{image}"  class="form-control">
+            <label>Lost</label>
+            <input type="checkbox" th:field="*{lost}" disabled="!${lostEnabled}"><br/>
+            <button type="submit" class="btn btn-defult">Add</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

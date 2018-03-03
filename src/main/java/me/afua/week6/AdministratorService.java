@@ -17,6 +17,11 @@ public class AdministratorService {
 
     }
 
+    public void addLostItem(LostItem l)
+    {
+        lostItemRepository.save(l);
+    }
+
     public void setToFound(LostItem l)
     {
         l.setLost(false);
@@ -28,6 +33,32 @@ public class AdministratorService {
         
     }
 
+    public Iterable <LostItem> showAllItems()
+    {
+        return lostItemRepository.findAll();
+    }
+
+    public Iterable <LostItem> showLostItems()
+    {
+        return lostItemRepository.findAllByLost(true);
+    }
+
+    public Iterable <LostItem>  showFoundItems()
+    {
+        return lostItemRepository.findAllByLost(false);
+
+    }
+
+    public LostItem getLostItem(long id)
+    {
+        return lostItemRepository.findById(id).get();
+    }
+
+    public void findItem(LostItem l)
+    {
+        l.setLost(false);
+        lostItemRepository.save(l);
+    }
 
 
 }

@@ -1,12 +1,10 @@
 package me.afua.week6;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class AppRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

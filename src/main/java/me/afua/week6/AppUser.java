@@ -1,11 +1,10 @@
 package me.afua.week6;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,10 +16,15 @@ public class AppUser {
 
     private String displayName;
 
+    @ManyToMany
     Set<AppRole> roles;
+
+    @ManyToMany(mappedBy="owners")
+    private Set<LostItem> lostItems;
 
     public AppUser() {
         this.roles = new HashSet<>();
+        this.lostItems = new HashSet<>();
     }
 
     public long getId() {
@@ -61,6 +65,14 @@ public class AppUser {
 
     public void setRoles(Set<AppRole> roles) {
         this.roles = roles;
+    }
+
+    public Set<LostItem> getLostItems() {
+        return lostItems;
+    }
+
+    public void setLostItems(Set<LostItem> lostItems) {
+        this.lostItems = lostItems;
     }
 
     public void addRole(AppRole r)

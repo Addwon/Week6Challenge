@@ -11,7 +11,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecConfig extends WebSecurityConfigurerAdapter{
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -27,10 +26,16 @@ public class SecConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated()
+
         .and()
         .formLogin().permitAll()
         .and()
         .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
+
+        http.headers().frameOptions().disable();
+        http.csrf().disable();
     }
 }
