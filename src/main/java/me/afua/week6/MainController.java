@@ -19,10 +19,6 @@ public class MainController {
     @RequestMapping("/")
     public String showAllItems(Authentication auth, Model model)
     {
-
-//        if(auth!=null)
-//         return "<h1>Helooooooo.."+auth.getName()+".</h1><br/>"+lostAndFound.showAllItems().toString();
-//
        model.addAttribute("lostList",lostAndFound.showAllItems());
        return "listitems";
     }
@@ -32,6 +28,7 @@ public class MainController {
     {
         model.addAttribute("lostIt",new LostItem());
         model.addAttribute("lostEnabled",false);
+        model.addAttribute("categories",lostAndFound.showCategories());
         return "additem";
     }
 

@@ -9,6 +9,9 @@ public class AdministratorService {
     @Autowired
     LostItemRepository lostItemRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
     public void addLostItem(String title,  String description)
     {
         LostItem l = new LostItem(title,description);
@@ -60,5 +63,9 @@ public class AdministratorService {
         lostItemRepository.save(l);
     }
 
+    public Iterable<Category> showCategories()
+    {
+        return categoryRepository.findAll();
+    }
 
 }
