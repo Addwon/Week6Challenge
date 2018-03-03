@@ -12,9 +12,18 @@ public class DataLoader implements CommandLineRunner {
 
     @Autowired
     CategoryRepository category;
+
+    @Autowired
+    AppRoleRepository roleRepo;
+
+    @Autowired
+    AppUserRepository userRepo;
+
+
     @Override
     public void run(String... args) throws Exception {
 
+        //Load Categories
 
         Category pets = new Category();
         pets.setName("Pets");
@@ -28,6 +37,17 @@ public class DataLoader implements CommandLineRunner {
         other.setName("Other");
         category.save(other);
 
+        //Load Roles
+
+        AppRole r = new AppRole("ADMIN");
+        roleRepo.save(r);
+
+        r = new AppRole("USER");
+        roleRepo.save(r);
+
+
+
+        //Load lost items
         LostItem l = new LostItem("Red scarf","A beauriful silk scarf left at the Shady Grove bus station");
         l.setLost(true);
         l.setItemCategory(clothes);
@@ -48,15 +68,21 @@ public class DataLoader implements CommandLineRunner {
         l.setItemCategory(clothes);
         lostItem.save(l);
 
+
+
+        AppUser u = new AppUser("theuser","password",roleRepo.findAppRoleByRoleName("USER"));
+        userRepo.save(u);
+
         l = new LostItem("Orange scarf","A beauriful silk scarf left at the Shady Grove bus station");
         l.setLost(true);
         l.setItemCategory(clothes);
+        l.addOwner(u);
         lostItem.save(l);
 
 
 
-
-
-
+        u = new AppUser("adminuser","password",roleRepo.findAppRoleByRoleName("ADMIN"));
+        userRepo.save(u);
+        System.out.println("READY TO ROLL");
     }
 }

@@ -33,6 +33,7 @@ public class LostItem {
     public LostItem(String title, String description) {
         this.title = title;
         this.description = description;
+        this.owners = new HashSet<>();
     }
 
     public long getId() {

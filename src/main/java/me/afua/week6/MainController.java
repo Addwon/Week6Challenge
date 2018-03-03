@@ -23,6 +23,13 @@ public class MainController {
        return "listitems";
     }
 
+    @RequestMapping("/myItems")
+    public String showMyItems(Authentication auth, Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.showMyItems(auth));
+        return "listitems";
+    }
+
     @GetMapping("/additem")
     public String addLostItem(Model model)
     {

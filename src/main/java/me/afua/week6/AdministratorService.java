@@ -1,6 +1,7 @@
 package me.afua.week6;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +12,9 @@ public class AdministratorService {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    AppUserRepository userRepo;
 
     public void addLostItem(String title,  String description)
     {
@@ -36,6 +40,12 @@ public class AdministratorService {
         
     }
 
+    public Iterable <LostItem> showMyItems(Authentication auth)
+    {
+        AppUser thisUser = userRepo.findByUsername(auth.getName());
+        return lostItemRepository.findAllByOwnersContains(thisUser);
+    }
+
     public Iterable <LostItem> showAllItems()
     {
         return lostItemRepository.findAll();
@@ -49,7 +59,6 @@ public class AdministratorService {
     public Iterable <LostItem>  showFoundItems()
     {
         return lostItemRepository.findAllByLost(false);
-
     }
 
     public LostItem getItem(long id)

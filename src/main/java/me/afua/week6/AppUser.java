@@ -1,5 +1,9 @@
 package me.afua.week6;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,15 +20,38 @@ public class AppUser {
 
     private String displayName;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     Set<AppRole> roles;
 
     @ManyToMany(mappedBy="owners")
     private Set<LostItem> lostItems;
 
+    @Transient //Equivalent to an ignore statement
+    private PasswordEncoder encoder;
+
+
+    @Transient //Equivalent to an ignore statement
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+
     public AppUser() {
         this.roles = new HashSet<>();
         this.lostItems = new HashSet<>();
+        encoder = passwordEncoder();
+    }
+
+    public AppUser(String username, String password, AppRole role) {
+        this.username = username;
+        this.roles = new HashSet<>();
+        this.lostItems = new HashSet<>();
+        addRole(role);
+        encoder = passwordEncoder();
+        setPassword(password);
+
     }
 
     public long getId() {
@@ -48,7 +75,8 @@ public class AppUser {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = encoder.encode(password);
+        System.out.println("Password:"+this.password);
     }
 
     public String getDisplayName() {
@@ -80,6 +108,9 @@ public class AppUser {
         this.roles.add(r);
     }
 
-
+    public void addLostItem(LostItem l)
+    {
+        this.lostItems.add(l);
+    }
 
 }

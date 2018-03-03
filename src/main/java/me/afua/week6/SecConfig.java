@@ -1,10 +1,13 @@
 package me.afua.week6;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -16,12 +19,21 @@ public class SecConfig extends WebSecurityConfigurerAdapter{
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    AppUserRepository userRepository;
+
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return new SSUDS(userRepository);
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         PasswordEncoder pE = passwordEncoder();
         auth.inMemoryAuthentication().withUser("username").password(pE.encode("password")).authorities("USER")
                 .and().withUser("admin").password(pE.encode("password")).authorities("ADMIN");
+        auth.userDetailsService(userDetailsServiceBean());
     }
 
     @Override

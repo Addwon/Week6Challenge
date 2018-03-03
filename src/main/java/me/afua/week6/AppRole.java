@@ -19,6 +19,13 @@ public class AppRole {
         this.users = new HashSet<>();
     }
 
+
+    //DON'T FORGET TO INSTANTIATE THE HASHSETS IN TEH OVERLOADED CONSTRUCTOR!!
+    public AppRole(String roleName) {
+        this.roleName = roleName;
+        this.users = new HashSet<>();
+    }
+
     public long getId() {
         return id;
     }
