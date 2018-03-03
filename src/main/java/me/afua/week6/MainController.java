@@ -43,18 +43,26 @@ public class MainController {
             return "additem";
         }
         lostAndFound.addLostItem(lost);
-        model.addAttribute("lostList",lostAndFound.showLostItems());
+        model.addAttribute("lostList",lostAndFound.showAllItems());
         return "redirect:/";
     }
 
     @GetMapping("/find")
     public String foundItem(HttpServletRequest request)
     {
-        LostItem theItem = lostAndFound.getLostItem(new Long(request.getParameter("id")));
+        LostItem theItem = lostAndFound.getItem(new Long(request.getParameter("id")));
         System.out.println("Lost Item:"+theItem.getTitle());
         lostAndFound.findItem(theItem);
         return "redirect:/";
     }
 
+    @GetMapping("/lose")
+    public String lostItem(HttpServletRequest request)
+    {
+        LostItem theItem = lostAndFound.getItem(new Long(request.getParameter("id")));
+        System.out.println("Found Item:"+theItem.getTitle());
+        lostAndFound.setToLost(theItem);
+        return "redirect:/";
+    }
 
 }

@@ -17,13 +17,11 @@
 
         <span>
            <div th:each="eachItem:${lostList}">
-               <span th:if="${eachItem.lost}">
                        <p th:text="${eachItem.title}"></p>
                        <p th:text="${eachItem.description}"></p>
-                             <a th:if="${eachItem.lost}==true" th:href="@{/find/(id=${eachItem.id})}" th:inline="text">Found</a>
-                       </span>
-                           <img th:src="${eachItem.image}"></img>
-               </span>
+                       <a th:if="${eachItem.lost}==true" th:href="@{/find/(id=${eachItem.id})}" th:inline="text">Found</a>
+                       <a th:if="${eachItem.lost}==false" th:href="@{/lose/(id=${eachItem.id})}" th:inline="text">Lost</a>
+                       <img th:src="${eachItem.image}"></img>
            </div>
         </span>
     </body>

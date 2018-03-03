@@ -22,9 +22,9 @@ public class AdministratorService {
         lostItemRepository.save(l);
     }
 
-    public void setToFound(LostItem l)
+    public void setToLost(LostItem l)
     {
-        l.setLost(false);
+        l.setLost(true);
         lostItemRepository.save(l);
     }
 
@@ -49,7 +49,7 @@ public class AdministratorService {
 
     }
 
-    public LostItem getLostItem(long id)
+    public LostItem getItem(long id)
     {
         return lostItemRepository.findById(id).get();
     }
