@@ -19,11 +19,13 @@
             <input type="text" th:field="*{image}"  class="form-control">
             <label>Lost</label>
             <input type="checkbox" th:field="*{lost}" disabled="!${lostEnabled}"><br/>
-            <span>
-                <select th:if="${adminAdd}" th:each="eachOwner:${ownerList}" th:field="${owners}">
-                    <option th:value="${eachOwner.id}" th:inline="text">[[${eachOwner.name}]]</option>
+            <input type="hidden" th:if="${addMyItem}" th:field="*{owners}">
+            <div class="col-md-4">
+                <select  th:field="*{owners}" class="form-control" th:if="${adminAdd}">
+                    <option th:each="eachOwner:${ownerList}" th:value="${eachOwner.id}" th:inline="text">[[${eachOwner.username}]]</option>
                 </select>
-            </span>
+            </div>
+            <br/>
             <button type="submit" class="btn btn-defult">Add</button>
         </form>
     </div>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DataLoader implements CommandLineRunner {
+
     @Autowired
     LostItemRepository lostItem;
 
@@ -24,7 +25,6 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //Load Categories
-
         Category pets = new Category();
         pets.setName("Pets");
         category.save(pets);
@@ -47,7 +47,7 @@ public class DataLoader implements CommandLineRunner {
 
 
 
-        //Load lost items
+        //Load lost items - clothes
         LostItem l = new LostItem("Red scarf","A beauriful silk scarf left at the Shady Grove bus station");
         l.setLost(true);
         l.setItemCategory(clothes);
@@ -66,6 +66,11 @@ public class DataLoader implements CommandLineRunner {
         l = new LostItem("Yellow scarf","A beauriful silk scarf left at the Shady Grove bus station");
         l.setLost(true);
         l.setItemCategory(clothes);
+        lostItem.save(l);
+
+        l = new LostItem("Cockatoo","A red cheery bird with an unusual colour");
+        l.setLost(true);
+        l.setItemCategory(pets);
         lostItem.save(l);
 
 

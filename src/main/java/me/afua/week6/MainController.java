@@ -46,6 +46,7 @@ public class MainController {
         l.addOwner(lostAndFound.getUser(auth.getName()));
         model.addAttribute("lostIt",l);
         model.addAttribute("lostEnabled",false);
+        model.addAttribute("addMyItem",true);
         model.addAttribute("categories",lostAndFound.showCategories());
         return "additem";
     }
@@ -56,8 +57,12 @@ public class MainController {
         LostItem l = new LostItem();
         model.addAttribute("lostIt",new LostItem());
         model.addAttribute("lostEnabled",false);
+
+        //Displays list of users so admin user can select a user to whom the item belongs
+        model.addAttribute("adminAdd",true);
         model.addAttribute("categories",lostAndFound.showCategories());
-        model.addAttribute("ownerlist",lostAndFound.showUsers());
+        model.addAttribute("ownerList",lostAndFound.showUsers());
+
         return "additem";
     }
 
@@ -90,5 +95,18 @@ public class MainController {
         lostAndFound.setToLost(theItem);
         return "redirect:/";
     }
+
+    @GetMapping("/search")
+    public String searchByCategory(Model model)
+    {
+        // TODO: 3/4/2018 Add a method to search through the entire database
+        String search = "red";
+        Category c = lostAndFound.findCategory("Pets");
+        model.addAttribute("lostList",lostAndFound.findByCategoryAnd(c,search));
+        return "listitems";
+
+    }
+
+
 
 }

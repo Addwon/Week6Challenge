@@ -93,4 +93,14 @@ public class AdministratorService {
         return userRepo.findByUsername(username);
     }
 
+    public Iterable<LostItem> findByCategoryAnd(Category c, String s)
+    {
+        return lostItemRepository.findAllByItemCategoryEqualsAndTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(c,s,s);
+    }
+
+    public Category findCategory(String name)
+    {
+        return categoryRepository.findByName(name);
+    }
+
 }
