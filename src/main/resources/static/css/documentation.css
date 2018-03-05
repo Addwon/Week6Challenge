@@ -152,3 +152,9 @@ pre.prettyprint{
 .table-bigboy .td-name{
     min-width: 170px;
 }
+
+.theimage-container
+{
+    width:130px;
+    height:85px;
+}

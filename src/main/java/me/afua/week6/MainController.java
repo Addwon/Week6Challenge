@@ -70,6 +70,13 @@ public class MainController {
         return "additem";
     }
 
+    @RequestMapping("/categories")
+    public String showCategories(Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.showLostItems());
+        return "categorylist";
+    }
+
     @PostMapping("/saveitem")
     public String saveLostItem(@Valid @ModelAttribute("lostIt") LostItem lost, BindingResult result, Model model) {
         System.out.println(lost.getItemCategory()+" saved as category id");

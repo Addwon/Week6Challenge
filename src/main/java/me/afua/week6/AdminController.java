@@ -36,4 +36,25 @@ public class AdminController {
         model.addAttribute("categories", lostAndFound.showCategories());
         return "additem";
     }
+
+    @GetMapping("/showlostclothes")
+    public String showLostClothes(Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.findByCategory(lostAndFound.findCategory("Clothes")));
+        return "listitems";
+    }
+
+    @GetMapping("/showlostothers")
+    public String showLostOthers(Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.findByCategory(lostAndFound.findCategory("Others")));
+        return "listitems";
+    }
+
+    @GetMapping("/showlostpets")
+    public String showLostPets(Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.findByCategory(lostAndFound.findCategory("Pets")));
+        return "listitems";
+    }
 }
