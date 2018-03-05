@@ -24,7 +24,15 @@ public class MainController {
 
     @RequestMapping("/myItems")
     public String showMyItems(Authentication auth, Model model) {
+
         model.addAttribute("lostList", lostAndFound.showMyItems(auth));
+        return "listitems";
+    }
+
+    @RequestMapping("/myfounditems")
+    public String showMyFoundItems(Authentication auth, Model model) {
+
+        model.addAttribute("lostList", lostAndFound.showMyFoundItems(auth));
         return "listitems";
     }
 
@@ -39,6 +47,7 @@ public class MainController {
     @GetMapping("/lostmyitem")
     public String addMyLostItem(Model model, Authentication auth) {
         LostItem l = new LostItem();
+        l.setItemCategory(lostAndFound.findCategory("Other"));
         l.addOwner(lostAndFound.getUser(auth.getName()));
         model.addAttribute("lostIt", l);
         model.addAttribute("lostEnabled", false);
@@ -63,8 +72,13 @@ public class MainController {
 
     @PostMapping("/saveitem")
     public String saveLostItem(@Valid @ModelAttribute("lostIt") LostItem lost, BindingResult result, Model model) {
+        System.out.println(lost.getItemCategory()+" saved as category id");
         if (result.hasErrors()) {
             return "additem";
+        }
+        if(lost.getImage().isEmpty())
+        {
+            lost.setImage(null);
         }
         lostAndFound.addLostItem(lost);
         model.addAttribute("lostList", lostAndFound.showAllItems());
@@ -101,6 +115,12 @@ public class MainController {
     public String loginPage()
     {
         return "login";
+    }
+
+    @RequestMapping("/showelements")
+    public String showElements()
+    {
+        return "elements";
     }
 
 

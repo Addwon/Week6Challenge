@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="header-wrapper" th:fragment="adminheadwrap">
+    <nav class="navbar navbar-transparent navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button id="menu-toggle" type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                </button>
+                <a href="http://www.byafua.com">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="https://avatars1.githubusercontent.com/u/7997881?s=460&v=4" alt="afua.me">
+                        </div>
+                        <div class="brand">
+                            By Afua
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul  class="nav navbar-nav navbar-right">
+                    <li>
+                        <a sec:authorize="hasAuthority('ADMIN')" href="/admin/lost">Lost Items</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="hasAuthority('ADMIN')" href="/admin/found">Found Items</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAuthenticated()" href="/admin/additemforuser">Add an item</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAnonymous()" href="/login">Log in</a>
+                        <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
+                    </li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="header" style="background-image: url('/img/full-screen-image-1.jpg');
+">
+        <div class="filter"></div>
+        <div class="title-container text-center">
+                  <span sec:authorize="isAnonymous()">
+                    WELCOME. SIGN IN.
+                </span>
+
+            <span sec:authorize="isAuthenticated()">
+                    WELCOME, <span sec:authentication="name"></span>
+                </span>
+
+
+            <h1>Lost and Found</h1>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

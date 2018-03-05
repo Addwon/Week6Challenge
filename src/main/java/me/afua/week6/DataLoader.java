@@ -27,15 +27,19 @@ public class DataLoader implements CommandLineRunner {
         //Load Categories
         Category pets = new Category();
         pets.setName("Pets");
+        pets.setDefaultPic("/img/petdefault.jpg");
         category.save(pets);
 
         Category clothes = new Category();
         clothes.setName("Clothes");
+        clothes.setDefaultPic("/img/clothesdefault.jpg");
         category.save(clothes);
 
         Category other  = new Category();
         other.setName("Other");
+        other.setDefaultPic("/img/otherdefault.jpg");
         category.save(other);
+
 
         //Load Roles
 

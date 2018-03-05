@@ -36,7 +36,6 @@ public class AppUser {
         return new BCryptPasswordEncoder();
     }
 
-
     public AppUser() {
         this.roles = new HashSet<>();
         this.lostItems = new HashSet<>();

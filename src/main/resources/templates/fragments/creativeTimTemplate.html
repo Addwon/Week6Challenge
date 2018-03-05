@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="headstuff">
+    <meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Lost and Found Application</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  Light Bootstrap Dashboard core CSS    -->
+    <link href="/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="/css/pe-icon-7-stroke.css" rel="stylesheet" />
+</th:block>
+
+<div class="header-wrapper" th:fragment="headwrap">
+    <nav class="navbar navbar-transparent navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button id="menu-toggle" type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                </button>
+                <a href="http://www.byafua.com">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="https://avatars1.githubusercontent.com/u/7997881?s=460&v=4" alt="afua.me">
+                        </div>
+                        <div class="brand">
+                            By Afua
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul  class="nav navbar-nav navbar-right">
+                    <li>
+                        <a sec:authorize="hasAuthority('ADMIN')" href="/">Lost Items</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="hasAuthority('ADMIN')" href="/">Found Items</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAuthenticated()" href="/lostmyitem">Add an item</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAuthenticated()" href="/myfounditems">My Found Items</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAnonymous()" href="/login">Log in</a>
+                        <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
+                    </li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="header" style="background-image: url('/img/full-screen-image-1.jpg');
+">
+        <div class="filter"></div>
+        <div class="title-container text-center">
+                  <span sec:authorize="isAnonymous()">
+                    WELCOME. SIGN IN.
+                </span>
+
+            <span sec:authorize="isAuthenticated()">
+                    WELCOME, <span sec:authentication="name"></span>
+                </span>
+
+
+            <h1>Lost and Found</h1>
+        </div>
+    </div>
+</div>
+
+<th:block th:fragment="footstuff">
+
+    <!--   Core JS Files and PerfectScrollbar library inside jquery.ui   -->
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+    <!--  Forms Validations Plugin -->
+    <script src="/js/jquery.validate.min.js"></script>
+
+    <!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+    <script src="/js/moment.min.js"></script>
+
+    <!--  Date Time Picker Plugin is included in this js file -->
+    <script src="/js/bootstrap-datetimepicker.js"></script>
+
+    <!--  Select Picker Plugin -->
+    <script src="/js/bootstrap-selectpicker.js"></script>
+
+    <!--  Checkbox, Radio, Switch and Tags Input Plugins -->
+    <script src="/js/bootstrap-checkbox-radio-switch-tags.js"></script>
+
+    <!--  Charts Plugin -->
+    <script src="/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="/js/bootstrap-notify.js"></script>
+
+    <!-- Sweet Alert 2 plugin -->
+    <script src="/js/sweetalert2.js"></script>
+
+    <!-- Vector Map plugin -->
+    <script src="/js/jquery-jvectormap.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <!-- Wizard Plugin    -->
+    <script src="/js/jquery.bootstrap.wizard.min.js"></script>
+
+    <!--  Datatable Plugin    -->
+    <script src="/js/bootstrap-table.js"></script>
+
+    <!--  Full Calendar Plugin    -->
+    <script src="/js/fullcalendar.min.js"></script>
+
+    <!-- Light Bootstrap Dashboard Core javascript and methods -->
+    <script src="/js/light-bootstrap-dashboard.js"></script>
+
+    <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+    <script src="/js/demo.js"></script>
+
+    <script type="text/javascript">
+        $().ready(function(){
+            lbd.checkFullPageBackgroundImage();
+
+            setTimeout(function(){
+                // after 1000 ms we add the class animated to the login/register card
+                $('.card').removeClass('card-hidden');
+            }, 700)
+        });
+    </script>
+</th:block>
+</body>
+</html>

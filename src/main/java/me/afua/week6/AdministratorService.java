@@ -46,6 +46,12 @@ public class AdministratorService {
         return lostItemRepository.findAllByOwnersContains(thisUser);
     }
 
+    public Iterable <LostItem> showMyFoundItems(Authentication auth)
+    {
+        AppUser thisUser = userRepo.findByUsername(auth.getName());
+        return lostItemRepository.findAllByOwnersContainsAndLost(thisUser,false);
+    }
+
     public Iterable <LostItem> showAllItems()
     {
         return lostItemRepository.findAll();

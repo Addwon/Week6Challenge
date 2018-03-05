@@ -40,7 +40,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/","/css/**","/js/**","/img/**","/fonts/**").permitAll()
+                .antMatchers("/","/css/**","/js/**","/img/**","/fonts/**,/showelements").permitAll()
                 .antMatchers("/adminaddlost").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
 
