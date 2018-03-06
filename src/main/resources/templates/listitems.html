@@ -14,8 +14,24 @@
     <div sec:authorize="hasAuthority('ADMIN')" th:replace="fragments/adminfragments::adminheadwrap"></div>
 
             <div class="container">
-
-
+                <div clas="row">
+                    <div class="col-md-3 col-md-offset-2">
+                        <a href="/showlostclothes">
+                        <img class ="theimage-container" src="/img/clothesdefault.jpg">
+                        <h3>Clothes</h3>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                       <a href="/showlostpets"> <img  class ="theimage-container" src="/img/petdefault.jpg">
+                           <h3>Pets</h3></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/showlostothers">
+                            <img  class ="theimage-container" src="/img/otherdefault.jpg">
+                            <h3>Others</h3>
+                        </a>
+                    </div>
+                </div>
                 <div class="col-md-10  col-md-offset-2">
                 <table class="table table-bigboy">
                     <thead>

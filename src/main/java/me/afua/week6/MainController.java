@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -74,7 +73,7 @@ public class MainController {
     public String showCategories(Model model)
     {
         model.addAttribute("lostList",lostAndFound.showLostItems());
-        return "categorylist";
+        return "listitems";
     }
 
     @PostMapping("/saveitem")
@@ -128,6 +127,29 @@ public class MainController {
     public String showElements()
     {
         return "elements";
+    }
+
+
+    //Show category items on the listitems page
+    @GetMapping("/showlostclothes")
+    public String showLostClothes(Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.findByCategory(lostAndFound.findCategory("Clothes")));
+        return "listitems";
+    }
+
+    @GetMapping("/showlostothers")
+    public String showLostOthers(Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.findByCategory(lostAndFound.findCategory("Others")));
+        return "listitems";
+    }
+
+    @GetMapping("/showlostpets")
+    public String showLostPets(Model model)
+    {
+        model.addAttribute("lostList",lostAndFound.findByCategory(lostAndFound.findCategory("Pets")));
+        return "listitems";
     }
 
 
