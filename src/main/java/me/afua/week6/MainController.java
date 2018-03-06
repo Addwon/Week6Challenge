@@ -161,10 +161,7 @@ public class MainController {
         String searchString = request.getParameter("search");
         String searchCategory = request.getParameter("category");
         //For security, escape characters where necessary here. Never trust the user.
-        Iterable <LostItem> list = lostAndFound.findByCategoryAnd(lostAndFound.findCategory(searchCategory),searchString);
-        model.addAttribute("displayCategory",searchCategory);
-        model.addAttribute("searchterm",searchString);
-        model.addAttribute("lostList",list);
+        Iterable <LostItem> list = lostAndFound.findByCategoryAnd(lostAndFound.findCategory(searchCategory),searchString);model.addAttribute("displayCategory",searchCategory);model.addAttribute("searchterm",searchString);model.addAttribute("lostList",list);
         return "searchcategories";
     }
 
