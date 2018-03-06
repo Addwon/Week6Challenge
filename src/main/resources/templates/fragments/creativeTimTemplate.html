@@ -91,7 +91,8 @@
 
 
             <h1>Lost and Found</h1>
-            <div th:replace="fragments/otherfragments::searchthis"></div>
+            <div th:if="!${advanced}" th:replace="fragments/otherfragments::searchthis"></div>
+            <div th:if="${advanced}"th:replace="fragments/otherfragments::advancedsearch"></div>
 
         </div>
     </div>

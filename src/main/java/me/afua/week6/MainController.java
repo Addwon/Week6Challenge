@@ -180,5 +180,14 @@ public class MainController {
         return "listitems";
     }
 
+    @RequestMapping("/advancedsearch")
+    public String advancedSearch(Model model)
+    {
+        model.addAttribute("advanced",true);
+        Iterable <LostItem> list = lostAndFound.showAllItems();
+        model.addAttribute("lostList",list);
+        return "listitems";
+    }
+
 
 }
