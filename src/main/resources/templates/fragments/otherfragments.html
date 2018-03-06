@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<form th:fragment="searchthis" th:action="@{/search}" th:method="post">
+    <div>
+        <input class="input-lg" name="search" placeholder="Enter a search term here"/>
+        <button class="btn btn-default btn-lg">Search</button>
+    </div>
+</form>
+
+</body>
+</html>

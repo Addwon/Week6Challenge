@@ -154,5 +154,31 @@ public class MainController {
 
 
 
+    //Category Search - Make this work in the morning
+    @PostMapping("/searchbycategory")
+    public String searchByCategory(HttpServletRequest request,Model model)
+    {
+        String searchString = request.getParameter("search");
+        String searchCategory = request.getParameter("category");
+        //For security, escape characters where necessary here. Never trust the user.
+        Iterable <LostItem> list = lostAndFound.findByCategoryAnd(lostAndFound.findCategory(searchCategory),searchString);
+        model.addAttribute("displayCategory",searchCategory);
+        model.addAttribute("searchterm",searchString);
+        model.addAttribute("lostList",list);
+        return "searchcategories";
+    }
+
+    @PostMapping("/search")
+    public String search(HttpServletRequest request,Model model)
+    {
+        String searchString = request.getParameter("search");
+
+        //For security, escape characters where necessary here. Never trust the user.
+        Iterable <LostItem> list = lostAndFound.findBySearchTerm(searchString);
+        model.addAttribute("searchterm",searchString);
+        model.addAttribute("lostList",list);
+        return "listitems";
+    }
+
 
 }

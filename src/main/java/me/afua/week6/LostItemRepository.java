@@ -12,4 +12,5 @@ public interface LostItemRepository extends CrudRepository<LostItem,Long> {
     Iterable <LostItem> findAllByItemCategoryEqualsAndTitleContainingIgnoreCase(Category c,String description);
     Iterable <LostItem> findAllByItemCategoryEqualsAndTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(Category c,String title,String description);
     Iterable <LostItem> findAllByItemCategory(Category c);
+    Iterable <LostItem> findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String title, String description);
 }

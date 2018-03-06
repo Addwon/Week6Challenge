@@ -114,4 +114,9 @@ public class AdministratorService {
         return categoryRepository.findByName(name);
     }
 
+    public Iterable<LostItem> findBySearchTerm(String s)
+    {
+        return lostItemRepository.findAllByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(s,s);
+    }
+
 }

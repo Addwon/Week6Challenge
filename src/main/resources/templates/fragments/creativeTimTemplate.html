@@ -73,7 +73,6 @@
                         <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
                     </li>
                 </ul>
-
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -92,6 +91,8 @@
 
 
             <h1>Lost and Found</h1>
+            <div th:replace="fragments/otherfragments::searchthis"></div>
+
         </div>
     </div>
 </div>
